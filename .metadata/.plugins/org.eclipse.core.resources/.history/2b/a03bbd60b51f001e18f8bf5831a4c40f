@@ -1,0 +1,37 @@
+package com;
+
+import java.util.ArrayList;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class AppMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	
+	
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Employee e = (Employee)context.getBean("emp");
+        System.out.println(e.getEmpId() +" : "+ e.getEmpName());
+
+ 
+
+        ArrayList<String> em = e.getProgLang();
+        System.out.println("Programming language-");
+        for(String s: em) {
+            System.out.println("  "+s);
+        }
+
+ 
+
+    }
+	
+	
+	
+	
+	
+	}
+
+

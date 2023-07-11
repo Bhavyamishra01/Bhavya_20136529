@@ -1,0 +1,64 @@
+package com;
+
+import java.lang.module.Configuration;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+public class App {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	
+	
+		  // Create a configuration object
+        Configuration configuration = new Configuration();
+
+        // Build the session factory
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+        // Open a session
+        Session session = sessionFactory.openSession();
+
+        // Begin a transaction
+        Transaction transaction = session.beginTransaction();
+
+        // Create a new Customer object
+        Customer customer = new Customer();
+        customer.setCname("John Doe");
+        customer.setPlace("New York");
+        customer.setPan("ABCDE1234F");
+
+        // Save the customer object to the database
+        session.save(customer);
+
+        // Commit the transaction
+        transaction.commit();
+
+        // Close the session and session factory
+        session.close();
+        sessionFactory.close();
+    }
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+
+}

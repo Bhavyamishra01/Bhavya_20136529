@@ -1,0 +1,153 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>EMI Calculator</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+ 
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+ 
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+ 
+
+        table {
+            width: 100%;
+        }
+
+ 
+
+        td {
+            padding: 5px;
+        }
+
+ 
+
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+ 
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+ 
+
+        .result-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+ 
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+ 
+
+        h3 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+ 
+
+        p {
+            margin-bottom: 10px;
+        }
+</style>
+</head>
+<body>
+<div>
+<h1> EMI Calculator</h1>
+<form method="post">
+<table>
+<tr>
+<td><label for="principal">Principal Amount:</label></td>
+<td><input type="number" id="principal" name="principal" required></td>
+</tr>
+<tr>
+<td><label for="interest">Rate of Interest:</label></td>
+<td><input type="number" id="interest" name="interest" required></td>
+</tr>
+<tr>
+<td><label for="time">Time (in months):</label></td>
+<td><input type="number" id="time" name="time"></td>
+</tr>
+</table>
+<input type="submit" name="submit" value="Calculate EMI">
+</form>
+
+ 
+
+ 
+
+        <% 
+        if (request.getParameter("submit") != null) {
+            double principal = Double.parseDouble(request.getParameter("principal"));
+            double interestRate = Double.parseDouble(request.getParameter("interest"));
+            int time = Integer.parseInt(request.getParameter("time"));
+
+ 
+
+ 
+
+            double monthlyInterest = interestRate / 12 / 100;
+            double numerator = principal * monthlyInterest * Math.pow(1 + monthlyInterest, time);
+            double denominator = Math.pow(1 + monthlyInterest, time) - 1;
+
+ 
+
+ 
+
+            double emi = numerator / denominator;
+        %>
+<div class="result-container">
+<h2>EMI Result:</h2>
+<p>Principal Amount: <%= principal %></p>
+<p>Rate of Interest: <%= interestRate %></p>
+<p>Time (in months): <%= time %></p>
+<h3>EMI: <%= emi %></h3>
+</div>
+<% } %>
+</div>
+</body>
+</html>
